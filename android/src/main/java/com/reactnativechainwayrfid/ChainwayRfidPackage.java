@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ChainwayRfidPackage implements ReactPackage {
+    
     @NonNull
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
@@ -19,6 +20,7 @@ public class ChainwayRfidPackage implements ReactPackage {
         modules.add(new ChainwayRfidModule(reactContext));
         return modules;
     }
+
 
     @NonNull
     @Override
