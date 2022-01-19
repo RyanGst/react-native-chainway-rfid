@@ -1,11 +1,12 @@
 package com.reactnativechainwayrfid;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.util.Log;
 
 import java.util.List;
-
-import javax.naming.ConfigurationException;
+import java.util.ArrayList;
 
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
@@ -17,7 +18,6 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-
 
 import com.rscja.deviceapi.RFIDWithUHF;
 import com.rscja.deviceapi.RFIDWithUHF.BankEnum;
@@ -54,7 +54,7 @@ public class ChainwayRfidModule extends ReactContextBaseJavaModule implements Li
     @Override
     @NonNull
     public String getName() {
-        return NAME + " - " + mReader.getVersion();
+        return NAME;
     }
 
     @Override
@@ -204,7 +204,6 @@ public class ChainwayRfidModule extends ReactContextBaseJavaModule implements Li
         return array;
     }
 
-
     private void sendEvent(String eventName, @Nullable WritableArray array) {
         getReactApplicationContext()
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
@@ -249,7 +248,7 @@ public class ChainwayRfidModule extends ReactContextBaseJavaModule implements Li
                     } catch (Exception ex) {
                         sendEvent("UHF_POWER", "failed: init error");
                     }
-                } catch (ConfigurationException ex) {
+                } catch (Exception ex) {
                     sendEvent("UHF_POWER", ex.getMessage());
                 }
             }
@@ -310,7 +309,7 @@ public class ChainwayRfidModule extends ReactContextBaseJavaModule implements Li
                 // Same Tag Found
                 // tag[1] = mReader.convertUiiToEPC(tag[1]);
                 String[] tagData = { tag.getEPC(), tag.getRssi() };
-                sendEvent("UHF_TAG", C72RfidScannerModule.convertArrayToWritableArray(tagData));
+                sendEvent("UHF_TAG", ChainwayRfidModule.convertArrayToWritableArray(tagData));
             }
         }
 
@@ -318,7 +317,7 @@ public class ChainwayRfidModule extends ReactContextBaseJavaModule implements Li
             if (!scannedTags.contains(tid.getEPC())) {
                 scannedTags.add(tid.getEPC());
                 String[] tagData = { tid.getEPC(), tid.getRssi() };
-                sendEvent("UHF_TAG", C72RfidScannerModule.convertArrayToWritableArray(tagData));
+                sendEvent("UHF_TAG", ChainwayRfidModule.convertArrayToWritableArray(tagData));
             }
         }
     }
