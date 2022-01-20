@@ -26,7 +26,7 @@ const App = () => {
 
   const tagListener = (data) => {
     //rssi = data[1] epc = data[0] //Iam only interested in the EPC tag
-    setTags((tags) => tags.concat(data[0]));
+    setTags((tags) => tags.concat(data));
   };
 
   React.useEffect(() => {
@@ -49,7 +49,7 @@ const App = () => {
 
   const changePower = async () => {
     try {
-      let result = await C72RfidScanner.changePower(10);
+      let result = await C72RfidScanner.changePower(30);
       showAlert('SUCCESS', `The result is ${result}`);
       console.log(result);
     } catch (error) {
@@ -67,9 +67,24 @@ const App = () => {
     }
   };
 
+  const writeTag = async () => {
+    try {
+      let result = await C72RfidScanner.writeTag('000000000000000000000085');
+      showAlert('SUCCESS', `The result is ${result}`);
+      console.log(result);
+    } catch (error) {
+      showAlert('FAILED', error.message);
+    }
+  };
 
   const startReading = () => {
     C72RfidScanner.startReadingTags(function success(message) {
+      setIsReading(message);
+    });
+  };
+
+  const findTag = () => {
+    C72RfidScanner.findTag('20001634', function success(message) {
       setIsReading(message);
     });
   };
@@ -109,8 +124,8 @@ const App = () => {
       <View style={{ marginVertical: 20 }}>
         <Button
           style={{ margin: 10 }}
-          onPress={() => changePower()}
-          title="Write EPC"
+          onPress={() => writeTag()}
+          title="Write a EPC"
         />
       </View>
       <View style={{ marginVertical: 20 }}>
@@ -120,7 +135,13 @@ const App = () => {
           title="Read Single Tag"
         />
       </View>
-
+      <View style={{ marginVertical: 20 }}>
+        <Button
+          style={{ margin: 10 }}
+          onPress={() => findTag()}
+          title="Find Tag"
+        />
+      </View>
       <View style={{ marginVertical: 20 }}>
         <Button
           disabled={isReading}

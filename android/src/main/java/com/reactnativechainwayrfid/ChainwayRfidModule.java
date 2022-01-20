@@ -138,7 +138,7 @@ public class ChainwayRfidModule extends ReactContextBaseJavaModule implements Li
             UHFTAGInfo tag = mReader.inventorySingleTag();
 
             if (!tag.getEPC().isEmpty()) {
-                String[] tagData = { tag.getEPC(), tag.getRssi() };
+                String[] tagData = { tag.getEPC(), tag.getRssi(), tag.getPc(), tag.getTid() };
                 promise.resolve(convertArrayToWritableArray(tagData));
             } else {
                 promise.reject(UHF_READER_READ_ERROR, "READ FAILED");
@@ -222,8 +222,6 @@ public class ChainwayRfidModule extends ReactContextBaseJavaModule implements Li
         new TagThread(findEpc).start();
         callback.invoke(uhfInventoryStatus);
     }
-
-    public static native int nativeMultiply(int a, int b);
 
     class UhfReaderPower extends Thread {
         Boolean powerOn;

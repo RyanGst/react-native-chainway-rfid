@@ -42,6 +42,14 @@ export function stopReadingTags(callback: any) {
   return ChainwayRfid.stopReadingTags(callback);
 }
 
+export function findTag(epc: string, callback: any) {
+  return ChainwayRfid.findTag(epc, callback);
+}
+
+export function writeTag(epc: string): Promise<any> {
+  return ChainwayRfid.writeDataIntoEpc(epc);
+}
+
 export const readPower = () => ChainwayRfid.readPower();
 
 export const changePower: changePower = (powerValue: number) => {
