@@ -1,6 +1,6 @@
 {
   "name": "react-native-chainway-rfid",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Chainway C72 RFID Reader Lib",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -26,7 +26,7 @@
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
-    "release": "release-it",  
+    "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods"
