@@ -1,6 +1,6 @@
 {
   "name": "react-native-chainway-rfid",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Chainway C72 RFID Reader Lib",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
