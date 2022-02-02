@@ -307,7 +307,7 @@ public class ChainwayRfidModule extends ReactContextBaseJavaModule implements Li
                 // Same Tag Found
                 // tag[1] = mReader.convertUiiToEPC(tag[1]);
                 String[] tagData = { tag.getEPC(), tag.getRssi() };
-                sendEvent("UHF_TAG", ChainwayRfidModule.convertArrayToWritableArray(tagData));
+                sendEvent("UHF_SEARCH", ChainwayRfidModule.convertArrayToWritableArray(tagData));
             }
         }
 

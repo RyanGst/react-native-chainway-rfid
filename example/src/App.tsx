@@ -29,11 +29,22 @@ const App = () => {
     setTags((tags) => tags.concat(data));
   };
 
+
+
+  const searchListener = (data) => {
+
+    console.log(data);
+
+    //rssi = data[1] epc = data[0] //Iam only interested in the EPC tag
+    ///setTags((tags) => tags.concat(data));
+  };
   React.useEffect(() => {
     const scanner = C72RfidScanner;
     scanner.initializeReader();
     scanner.powerListener(powerListener);
     scanner.tagListener(tagListener);
+    scanner.searchListener(searchListener);
+
     return () => scanner.deInitializeReader();
   }, []);
 
@@ -84,7 +95,7 @@ const App = () => {
   };
 
   const findTag = () => {
-    C72RfidScanner.findTag('20001634', function success(message) {
+    C72RfidScanner.findTag('00000000000000000000000020000519', function success(message) {
       setIsReading(message);
     });
   };

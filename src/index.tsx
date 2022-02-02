@@ -9,13 +9,13 @@ const LINKING_ERROR =
 const ChainwayRfid = NativeModules.ChainwayRfid
   ? NativeModules.ChainwayRfid
   : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+    {},
+    {
+      get() {
+        throw new Error(LINKING_ERROR);
+      },
+    }
+  );
 
 type changePower = (powerValue: number) => Promise<any>;
 type AddListener = (cb: (args: any[]) => void) => void;
@@ -61,5 +61,9 @@ export const powerListener: AddListener = (listener) =>
 
 export const tagListener: AddListener = (listener) =>
   eventEmitter.addListener('UHF_TAG', listener);
+
+
+export const searchListener: AddListener = (listener) =>
+  eventEmitter.addListener('UHF_SEARCH', listener);
 
 export const clearTags = () => ChainwayRfid.clearAllTags();
