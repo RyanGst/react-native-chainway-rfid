@@ -1,6 +1,9 @@
-# react-native-chainway-rfid
+# react-native-chainway-rfid 📡
 
-Chainway C72 RFID Reader Lib
+> [!CAUTION]
+> This library is current unmaintained. If you are interested in maintaining this library, please contact me.
+
+This library is a native module for the Chainway C72 RFID Reader Lib.
 
 ## Installation
 
@@ -11,11 +14,13 @@ npm install react-native-chainway-rfid
 ## Usage
 
 ```js
-import { multiply } from "react-native-chainway-rfid";
-
-// ...
-
-const result = await multiply(3, 7);
+useEffect(() => {
+  const scanner = C72RfidScanner;
+  scanner.initializeReader();
+  // write your code here
+  scanner.powerListener(powerListener);
+  scanner.tagListener(tagListener);
+}, []);
 ```
 
 ## Contributing
@@ -25,3 +30,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 ## License
 
 MIT
+
+## Contact
+
+If you have any questions, please [contact me](mailto:ryangst.hire@gmail.com)
