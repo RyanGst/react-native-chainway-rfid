@@ -1,7 +1,7 @@
 # react-native-chainway-rfid 📡
 
 > [!CAUTION]
-> This library is current unmaintained. If you are interested in maintaining this library, please contact me.
+> This library is currently unmaintained. If you are interested in maintaining this library, please [contact me](mailto:ryangst.hire@gmail.com).
 
 This library is a native module for the Chainway C72 RFID Reader Lib.
 
